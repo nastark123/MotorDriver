@@ -1,0 +1,122 @@
+
+MotorControllerFirmware.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .data         00000000  00803e00  00803e00  000000cc  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  1 .text         00000078  00000000  00000000  00000054  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  2 .comment      00000030  00000000  00000000  000000cc  2**0
+                  CONTENTS, READONLY
+  3 .note.gnu.avr.deviceinfo 0000003c  00000000  00000000  000000fc  2**2
+                  CONTENTS, READONLY
+  4 .debug_aranges 00000020  00000000  00000000  00000138  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   00002272  00000000  00000000  00000158  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00001af8  00000000  00000000  000023ca  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   00000285  00000000  00000000  00003ec2  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  00000024  00000000  00000000  00004148  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000f4c  00000000  00000000  0000416c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_ranges 00000010  00000000  00000000  000050b8  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	1d c0       	rjmp	.+58     	; 0x3c <__ctors_end>
+   2:	24 c0       	rjmp	.+72     	; 0x4c <__bad_interrupt>
+   4:	23 c0       	rjmp	.+70     	; 0x4c <__bad_interrupt>
+   6:	22 c0       	rjmp	.+68     	; 0x4c <__bad_interrupt>
+   8:	21 c0       	rjmp	.+66     	; 0x4c <__bad_interrupt>
+   a:	20 c0       	rjmp	.+64     	; 0x4c <__bad_interrupt>
+   c:	1f c0       	rjmp	.+62     	; 0x4c <__bad_interrupt>
+   e:	1e c0       	rjmp	.+60     	; 0x4c <__bad_interrupt>
+  10:	1d c0       	rjmp	.+58     	; 0x4c <__bad_interrupt>
+  12:	1c c0       	rjmp	.+56     	; 0x4c <__bad_interrupt>
+  14:	1b c0       	rjmp	.+54     	; 0x4c <__bad_interrupt>
+  16:	1a c0       	rjmp	.+52     	; 0x4c <__bad_interrupt>
+  18:	19 c0       	rjmp	.+50     	; 0x4c <__bad_interrupt>
+  1a:	18 c0       	rjmp	.+48     	; 0x4c <__bad_interrupt>
+  1c:	17 c0       	rjmp	.+46     	; 0x4c <__bad_interrupt>
+  1e:	16 c0       	rjmp	.+44     	; 0x4c <__bad_interrupt>
+  20:	15 c0       	rjmp	.+42     	; 0x4c <__bad_interrupt>
+  22:	14 c0       	rjmp	.+40     	; 0x4c <__bad_interrupt>
+  24:	13 c0       	rjmp	.+38     	; 0x4c <__bad_interrupt>
+  26:	12 c0       	rjmp	.+36     	; 0x4c <__bad_interrupt>
+  28:	11 c0       	rjmp	.+34     	; 0x4c <__bad_interrupt>
+  2a:	10 c0       	rjmp	.+32     	; 0x4c <__bad_interrupt>
+  2c:	0f c0       	rjmp	.+30     	; 0x4c <__bad_interrupt>
+  2e:	0e c0       	rjmp	.+28     	; 0x4c <__bad_interrupt>
+  30:	0d c0       	rjmp	.+26     	; 0x4c <__bad_interrupt>
+  32:	0c c0       	rjmp	.+24     	; 0x4c <__bad_interrupt>
+  34:	0b c0       	rjmp	.+22     	; 0x4c <__bad_interrupt>
+  36:	0a c0       	rjmp	.+20     	; 0x4c <__bad_interrupt>
+  38:	09 c0       	rjmp	.+18     	; 0x4c <__bad_interrupt>
+  3a:	08 c0       	rjmp	.+16     	; 0x4c <__bad_interrupt>
+
+0000003c <__ctors_end>:
+  3c:	11 24       	eor	r1, r1
+  3e:	1f be       	out	0x3f, r1	; 63
+  40:	cf ef       	ldi	r28, 0xFF	; 255
+  42:	cd bf       	out	0x3d, r28	; 61
+  44:	df e3       	ldi	r29, 0x3F	; 63
+  46:	de bf       	out	0x3e, r29	; 62
+  48:	02 d0       	rcall	.+4      	; 0x4e <main>
+  4a:	14 c0       	rjmp	.+40     	; 0x74 <_exit>
+
+0000004c <__bad_interrupt>:
+  4c:	d9 cf       	rjmp	.-78     	; 0x0 <__vectors>
+
+0000004e <main>:
+#include <avr/io.h>
+
+int main(void) {
+
+	// enable split mode for timer
+	TCA0.SINGLE.CTRLD = TCA_SINGLE_SPLITM_bm;
+  4e:	e0 e0       	ldi	r30, 0x00	; 0
+  50:	fa e0       	ldi	r31, 0x0A	; 10
+  52:	81 e0       	ldi	r24, 0x01	; 1
+  54:	83 83       	std	Z+3, r24	; 0x03
+	// TODO find out system clock and adjust this accordingly
+	// assuming we use a 1 MHz clock, this will set the PWM frequency to 5 kHz
+	TCA0.SPLIT.HPER = 199;
+  56:	97 ec       	ldi	r25, 0xC7	; 199
+  58:	97 a3       	std	Z+39, r25	; 0x27
+	TCA0.SPLIT.LPER = 199;
+  5a:	96 a3       	std	Z+38, r25	; 0x26
+	// example duty cycle setting, set 50% on high timer, 25% on low
+	TCA0.SPLIT.HCMP0 = 100;
+  5c:	94 e6       	ldi	r25, 0x64	; 100
+  5e:	91 a7       	std	Z+41, r25	; 0x29
+	TCA0.SPLIT.LCMP0 = 50;
+  60:	92 e3       	ldi	r25, 0x32	; 50
+  62:	90 a7       	std	Z+40, r25	; 0x28
+	// clear the counts in both timer's count register
+	TCA0.SPLIT.HCNT = 0;
+  64:	11 a2       	std	Z+33, r1	; 0x21
+	TCA0.SPLIT.LCNT = 0;
+  66:	10 a2       	std	Z+32, r1	; 0x20
+	// enable PWM outputs
+	TCA0.SPLIT.CTRLB = TCA_SPLIT_HCMP0EN_bm | TCA_SPLIT_LCMP0_bm;
+  68:	90 e1       	ldi	r25, 0x10	; 16
+  6a:	91 83       	std	Z+1, r25	; 0x01
+	TCA0.SPLIT.CTRLA = TCA_SPLIT_ENABLE_bm;
+  6c:	80 83       	st	Z, r24
+    
+}
+  6e:	80 e0       	ldi	r24, 0x00	; 0
+  70:	90 e0       	ldi	r25, 0x00	; 0
+  72:	08 95       	ret
+
+00000074 <_exit>:
+  74:	f8 94       	cli
+
+00000076 <__stop_program>:
+  76:	ff cf       	rjmp	.-2      	; 0x76 <__stop_program>
