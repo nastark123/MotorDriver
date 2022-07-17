@@ -1037,6 +1037,7 @@
     )
   )
 
+
   (junction (at 19.05 63.5) (diameter 0) (color 0 0 0 0)
     (uuid 10d6d677-60a5-4b77-a98f-9ccb74a7515f)
   )
@@ -1780,7 +1781,7 @@
     (property "Value" "HALF_BRIDGE_DRIVER_DGD2003" (id 1) (at 161.29 78.74 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Footprint" "Package_SO:SO-8_3.9x4.9mm_P1.27mm" (id 2) (at 153.67 82.55 0)
+    (property "Footprint" "" (id 2) (at 153.67 82.55 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (id 3) (at 153.67 82.55 0)
@@ -2329,7 +2330,7 @@
     (property "Value" "HALF_BRIDGE_DRIVER_DGD2003" (id 1) (at 161.29 44.45 0)
       (effects (font (size 1.27 1.27)) hide)
     )
-    (property "Footprint" "Package_SO:SO-8_3.9x4.9mm_P1.27mm" (id 2) (at 153.67 48.26 0)
+    (property "Footprint" "" (id 2) (at 153.67 48.26 0)
       (effects (font (size 1.27 1.27)) hide)
     )
     (property "Datasheet" "" (id 3) (at 153.67 48.26 0)
@@ -2762,10 +2763,10 @@
       (reference "U2") (unit 1) (value "AP7375-33SA-7") (footprint "AP7375-33SA-7_DIO")
     )
     (path "/b83e4078-a03d-4e1a-95b1-139bb489f159"
-      (reference "U3") (unit 1) (value "HALF_BRIDGE_DRIVER_DGD2003") (footprint "Package_SO:SO-8_3.9x4.9mm_P1.27mm")
+      (reference "U3") (unit 1) (value "HALF_BRIDGE_DRIVER_DGD2003") (footprint "")
     )
     (path "/2beea99d-daa1-4759-bcb8-c4edff529d24"
-      (reference "U4") (unit 1) (value "HALF_BRIDGE_DRIVER_DGD2003") (footprint "Package_SO:SO-8_3.9x4.9mm_P1.27mm")
+      (reference "U4") (unit 1) (value "HALF_BRIDGE_DRIVER_DGD2003") (footprint "")
     )
     (path "/7b596c7e-cd71-4a73-abc5-761b391b1297"
       (reference "Y1") (unit 1) (value "16 MHz") (footprint "Crystal:Crystal_SMD_5032-2Pin_5.0x3.2mm")
